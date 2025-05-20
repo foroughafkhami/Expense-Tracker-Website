@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react'
+import React, { createContext, useContext, useState,useEffect } from 'react'
 
 const TransactionContext = createContext()
 
@@ -7,13 +7,24 @@ function TransactionProvider({children}) {
   const [income,setIncome]= useState(0)
   const [expense,setExpense]= useState(0)
 
+  useEffect(() => {
+    const newIncome = transactions
+      .filter(tran => tran.amount > 0)
+      .reduce((acc, tran) => acc + tran.amount, 0);
+    const newExpense = transactions
+      .filter(tran => tran.amount < 0)
+      .reduce((acc, tran) => acc + tran.amount, 0);
+
+    setIncome(newIncome);
+    setExpense(newExpense);
+  }, [transactions]);
+
   return <TransactionContext.Provider value={{
     transactions,
     setTransactions,
     income,
-    setIncome,
     expense,
-    setExpense
+    
   }}>{children}</TransactionContext.Provider>
 
 }

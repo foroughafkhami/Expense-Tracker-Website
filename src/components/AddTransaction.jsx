@@ -2,7 +2,7 @@ import React from 'react'
 import { ErrorMessage, Field, Formik ,Form} from 'formik'
 import { useTransactionContext } from '../contexts/TransactionContext'
 function AddTransaction() {
-  const {transactions, setTransactions,setIncome,setExpense,income,expense} = useTransactionContext() 
+  const {transactions, setTransactions,income,expense} = useTransactionContext() 
   return (
     <div className='w-full'>
       <h2 className='font-bold text-lg border-b-2 my-3  py-1.5'>Add new transaction</h2>
@@ -29,7 +29,7 @@ function AddTransaction() {
 
             return
           }
-          values.amount > 0 ? setIncome(income => income + values.amount): setExpense(expense=> expense + values.amount)
+          // values.amount > 0 ? setIncome(income => income + values.amount): setExpense(expense=> expense + values.amount)
           setTransactions([{text:values.text,amount:values.amount,id:Math.random()*1000},...transactions])
           resetForm()
           setSubmitting(false)
