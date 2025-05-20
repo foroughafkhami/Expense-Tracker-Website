@@ -3,11 +3,15 @@
 
 2. Add and delete transactions easily
 
-3. Responsive design using Tailwind CSS
+3. Styling using Tailwind CSS
 
 4. Global state management using React Context API
 
 5. Form handling with Formik
+
+6. Persist to local storage
+
+
 
 # React + Vite
 
