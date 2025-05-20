@@ -3,11 +3,19 @@ import React, { createContext, useContext, useState,useEffect } from 'react'
 const TransactionContext = createContext()
 
 function TransactionProvider({children}) {
-  const [transactions,setTransactions] = useState([])
+
+  const [transactions,setTransactions] = useState(() => {
+    return JSON.parse(localStorage.getItem('transactionList')) || []
+  })
   const [income,setIncome]= useState(0)
   const [expense,setExpense]= useState(0)
 
+
+
+
   useEffect(() => {
+    window.localStorage.setItem('transactionList', JSON.stringify(transactions));
+
     const newIncome = transactions
       .filter(tran => tran.amount > 0)
       .reduce((acc, tran) => acc + tran.amount, 0);
